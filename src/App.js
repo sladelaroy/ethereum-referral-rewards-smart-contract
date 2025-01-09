@@ -65,7 +65,7 @@ function App() {
           placeholder="amount of token to be rewarded" 
         /> 
         <button onClick={() => handleRefferalReward()}>
-          Set Reffaral Reward
+          Set Refferal Reward
         </button>
 
         <h4>Enter the address of the person who referred you</h4>
@@ -77,7 +77,7 @@ function App() {
         /> 
         <button 
           onClick={handleAddReferral}>
-            Add Referral
+            Add Refferal
         </button>
       </header>
     </div>
