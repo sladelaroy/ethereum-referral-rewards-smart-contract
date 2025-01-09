@@ -10,7 +10,7 @@ function App() {
   const [signer, setSigner] = useState(null);
   const [tokenContract, setTokenContract] = useState(null);
   const [referralContract, setReferralContract] = useState(null);
-  const [referrer, setReferrer] = useState('');
+  const [referrer, setReferrer] = useState('0x...');
   const [refferalReward, setRefferalReward] = useState(100);
 
   useEffect(() => {
@@ -23,6 +23,8 @@ function App() {
 
         const tokenContract = new ethers.Contract(deployedContracts.MyToken, tokenAbi.abi, signer);
         const referralContract = new ethers.Contract(deployedContracts.ReferralRewards, referralAbi.abi, signer);
+
+        console.log(tokenContract)
 
         setTokenContract(tokenContract);
         setReferralContract(referralContract);
@@ -45,9 +47,9 @@ function App() {
       await tx.wait();
       alert(`you were reffered by ${referrer}`);
 
-      await referralContract.calculateReward(referrer, refferalReward);
-      const reward = await referralContract.rewards(referrer)
-      alert(`${referrer} received ${refferalReward} tokens as reward`);
+      // await referralContract.calculateReward(referrer, refferalReward);
+      // const reward = await referralContract.rewards(referrer)
+      // alert(`${referrer} received ${refferalReward} tokens as reward`);
 
     } catch (error) {
       console.error('Error adding referral:', error);
@@ -72,7 +74,7 @@ function App() {
         <input 
           type="text"
           value={referrer}
-          onChange={(e) => setReferrer(`${e.target.value}`)}
+          onChange={(e) => {setReferrer(e.target.value); console.log(referrer)}}
           placeholder="Referrer Address" 
         /> 
         <button 
